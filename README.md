@@ -63,7 +63,7 @@ We build our detector using Faster R-CNN with ResNet-50 + FPN as the backbone.
 | Learning Rate         | 5e-5                      |
 | Weight Decay          | 0.0005                    |
 | Batch Size            | 2                         |
-| Epochs                | 10                        |
+| Epochs                | 8                         |
 | LR Scheduler (Epoch 1)| Warm-up (`LambdaLR`)      |
 | LR Scheduler (2–12)   | `CosineAnnealingLR`       |
 | Minimum LR            | 1e-6                      |
