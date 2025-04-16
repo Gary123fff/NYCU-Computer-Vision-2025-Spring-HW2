@@ -1,5 +1,4 @@
 # NYCU-Computer-Vision-2025-Spring-HW2
-# NYCU-Computer-Vision-2025-Spring-HW1
 Student ID: 313551139 
 
 Name: 陳冠豪
