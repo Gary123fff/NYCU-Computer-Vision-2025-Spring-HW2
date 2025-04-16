@@ -83,28 +83,23 @@ conda activate cv
 ```
 
 3. Download the dataset 
-- Download the dataset from the [LINK]([https://drive.google.com/file/d/1fx4Z6xl5b6r4UFkBrn5l0oPEIagZxQ5u/view](https://drive.google.com/file/d/13JXJ_hIdcloC63sS-vF3wFQLsUP1sMz5/view))
+- Download the dataset from the [LINK](https://drive.google.com/file/d/13JXJ_hIdcloC63sS-vF3wFQLsUP1sMz5/view)
 - Put it in the following structure
 ```
 NYCU-Computer-Vision-2025-Spring-HW1
-├── data
-│   ├── test
+├── datasets
 │   ├── train
-│   └── val
-├── datas
-│   ├── dataset.py
-├── models
-│   ├── resxnet_model.py
-├── utils
-│   ├── augmentations.py
-│   ├── focal_loss.py
-│   ├── metrics.py
-│   .
-│   .
-│   .
-├── inference.py
+│   ├── valid
+├   ├── test
+├   ├── train.json
+│   └── valid.json
+├── dataset.py
+├── main.py
+├── model.py
+├── pred.py
 ├── main.py
 ├── train.py
+├── valid.py
 .
 .
 .
