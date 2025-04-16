@@ -38,7 +38,7 @@ This two-step design enables robust digit-level recognition and complete number 
 
 We build our detector using Faster R-CNN with ResNet-50 + FPN as the backbone.
 
-- **Backbone**: ResNet-50 + FPN for multi-scale feature extraction
+- **Backbone**: ResNet-50 + FPN for multi-scale feature extraction (fasterrcnn_resnet50_fpn_v2)
 
 - **Region Proposal Network (RPN)**:
   - Custom anchor sizes: `[8, 16, 32, 32, 64]`
