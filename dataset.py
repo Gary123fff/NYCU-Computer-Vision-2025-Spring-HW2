@@ -1,15 +1,18 @@
-from pycocotools.coco import COCO
+"""
+COCO Detection Dataset for PyTorch using pycocotools.
+"""
+
+import os 
 from PIL import Image
 import torch
-import os
-from torchvision import transforms as T
-import torch
-from PIL import Image
-import os
 from pycocotools.coco import COCO
 
 
 class COCODetection(torch.utils.data.Dataset):
+    """
+    A PyTorch Dataset class to load COCO format object detection data.
+    """
+
     def __init__(self, image_dir, annotation_path, transforms=None):
         self.image_dir = image_dir
         self.coco = COCO(annotation_path)
@@ -33,15 +36,13 @@ class COCODetection(torch.utils.data.Dataset):
         for ann in anns:
             x, y, w, h = ann['bbox']
             boxes.append([x, y, x + w, y + h])
-
             labels.append(ann['category_id'])
             areas.append(ann['area'])
             iscrowd.append(ann.get('iscrowd', 0))
 
-        # 确保至少有一个边界框，即使是空的
         if len(boxes) == 0:
-            boxes = [[0, 0, 1, 1]]  # 添加一个虚拟框
-            labels = [0]  # 背景类
+            boxes = [[0, 0, 1, 1]]
+            labels = [0]
             areas = [0]
             iscrowd = [0]
 
@@ -53,7 +54,6 @@ class COCODetection(torch.utils.data.Dataset):
             'iscrowd': torch.tensor(iscrowd, dtype=torch.int64),
         }
 
-        # 应用变换到图像和目标
         if self.transforms:
             img, target = self.transforms(img, target)
 
