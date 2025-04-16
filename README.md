@@ -112,5 +112,5 @@ python main.py
 ![Alt Text](training_curves._50_2.png)
 
 ### Performance
-![Alt Text](reault.png)
+![Alt Text](result.png)
 
