@@ -97,7 +97,6 @@ NYCU-Computer-Vision-2025-Spring-HW1
 ├── main.py
 ├── model.py
 ├── pred.py
-├── main.py
 ├── train.py
 ├── valid.py
 .
