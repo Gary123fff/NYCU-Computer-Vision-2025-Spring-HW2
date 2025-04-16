@@ -112,8 +112,5 @@ python main.py
 ![Alt Text](training_curves._50_2.png)
 
 ### Performance
-![Alt Text](per.png)
-|                  | Accuracy(%)                                         |
-|------------------|-----------------------------------------------------|
-| Validation       | 92                                                  |
-| Public Test      | 94                                                  |
+![Alt Text](reault.png)
+
