@@ -161,7 +161,7 @@ def predict(model_path="fasterrcn_50.pth", visualize=True):
                     "image_id": image_id,
                     "bbox": [x_min, y_min, x_max - x_min, y_max - y_min],
                     "score": score.item(),
-                    "category_id": int(label.item())
+                    "category_id": int(label.item()+1)
                 })
 
     with open("pred.json", "w", encoding="utf-8") as f:
