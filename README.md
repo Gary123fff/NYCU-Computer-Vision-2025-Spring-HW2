@@ -86,7 +86,7 @@ conda activate cv
 - Download the dataset from the [LINK](https://drive.google.com/file/d/13JXJ_hIdcloC63sS-vF3wFQLsUP1sMz5/view)
 - Put it in the following structure
 ```
-NYCU-Computer-Vision-2025-Spring-HW1
+NYCU-Computer-Vision-2025-Spring-HW2
 ├── datasets
 │   ├── train
 │   ├── valid
