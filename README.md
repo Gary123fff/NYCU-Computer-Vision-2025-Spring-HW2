@@ -3,37 +3,72 @@ Student ID: 313551139
 
 Name: 陳冠豪
 ## Introduction
-# Image Classification Model using ResNeXt-101_64x4d
+This project aims to build a digit recognition system using **Faster R-CNN**, an advanced object detection model. The dataset consists of RGB images, each containing one or more digits. We address two main tasks:
 
-This repository contains an image classification model built using the pretrained `ResNeXt-101_64x4d` model. The goal is to achieve high performance on image classification tasks by applying advanced techniques such as data augmentation, class balancing, and smart training strategies.
+- **Task 1**: Detect individual digits by identifying their class labels (`0–9`) and bounding boxes.
+- **Task 2**: Recognize the full number by combining detected digits into a string, sorted from **left to right**.
 
- *Model Architecture*
+Our approach leverages **Faster R-CNN's powerful detection capabilities**:
+1. **Digit Detection** – We detect all digits in the image using the trained model.
+2. **Number Reconstruction** – Detected digits are sorted by their bounding box x-coordinates to form the final number string.
 
-- **Backbone**: `ResNeXt-101_64x4d` from `torchvision.models` is used as the backbone, providing strong feature extraction capabilities.
-- **Global Average Pooling**: The model ends with Global Average Pooling (GlobalAvgPool) to handle variable input image sizes effectively.
+This two-step design enables robust digit-level recognition and complete number interpretation.
 
- *Loss Function*
+##Method
+### 1. Data Preprocessing
 
-- **Focal Loss**: This loss function is used to address class imbalance by focusing more on hard-to-classify samples, improving model performance on imbalanced datasets.
+- **Format**: COCO-style JSON annotations
 
- *Data Augmentation*
+- **Paths**:
+  - Training images: `./datasets/train`
+  - Validation images: `./datasets/valid`
+  - Annotation files: `train.json`, `valid.json`
 
-- **MixUp & CutMix**: These techniques are applied to blend images and labels, helping the model generalize better.
-- **AutoAugment**: This method introduces more variations to the training images, further improving the model's robustness.
+- **Transforms**:
+  - Convert images to tensors
+  - Data augmentation: **Scaling** (applied only during training)
 
- *Data Loading*
+- **Custom Collate Function**:
+  - Handles batches of variable-sized images required by Faster R-CNN.
 
-- **Balanced Dataloader**: The `get_balanced_dataloader()` function uses `WeightedRandomSampler` to ensure class balance in each batch, improving performance on imbalanced datasets.
+- **Visualization Tool**:
+  - `visualize_random_ground_truth()` randomly samples and displays images with their annotated bounding boxes for inspection.
+ 
+### 2. Model Architecture
 
- *Training Process*
+We build our detector using Faster R-CNN with ResNet-50 + FPN as the backbone.
 
-- **Optimizer**: AdamW optimizer is used, with different learning rates for different layers in ResNeXt-101 to optimize performance.
-- **OneCycleLR**: This learning rate scheduler dynamically adjusts the learning rate during training to help the model avoid local minima.
-- **Early Stopping**: The model monitors validation loss and stops training early if overfitting is detected, ensuring better generalization.
+- **Backbone**: ResNet-50 + FPN for multi-scale feature extraction
 
- *Goal*
+- **Region Proposal Network (RPN)**:
+  - Custom anchor sizes: `[8, 16, 32, 32, 64]`
+  - Aspect ratios: `[0.5, 1.0, 2.0]`
 
-The model is designed to improve generalization by utilizing smart data augmentation strategies, dynamic learning rate adjustment, and handling class imbalance through Focal Loss. These techniques combine to create a robust image classification model that performs well on challenging datasets.
+- **RoI Align**: MultiScaleRoIAlign with output size `7x7` and sampling ratio `2`
+
+- **Detection Head**:
+  - **Classification head**: Digit label (0–9 + background)
+  - **Regression head**: Bounding box refinement
+
+- **Input Size**:
+  - Minimum: `512`
+  - Maximum: `1024`
+
+ ###  3. Training Settings
+
+| Hyperparameter        | Value                     |
+|-----------------------|---------------------------|
+| Optimizer             | AdamW                     |
+| Learning Rate         | 5e-5                      |
+| Weight Decay          | 0.0005                    |
+| Batch Size            | 2                         |
+| Epochs                | 12                        |
+| LR Scheduler (Epoch 1)| Warm-up (`LambdaLR`)      |
+| LR Scheduler (2–12)   | `CosineAnnealingLR`       |
+| Minimum LR            | 1e-6                      |
+| Loss Function         | Cross-Entropy + Smooth L1 |
+
+---
 ## How to install
 1. Clone the repository
 ```
