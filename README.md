@@ -73,7 +73,7 @@ We build our detector using Faster R-CNN with ResNet-50 + FPN as the backbone.
 ## How to install
 1. Clone the repository
 ```
-git clone https://github.com/Gary123fff/NYCU-Computer-Vision-2025-Spring-HW1.git
+git clone https://github.com/Gary123fff/NYCU-Computer-Vision-2025-Spring-HW2.git
 cd NYCU-Computer-Vision-2025-Spring-HW1
 ```
 2. Create a virtual environment
