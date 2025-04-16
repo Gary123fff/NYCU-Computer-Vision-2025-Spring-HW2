@@ -71,5 +71,6 @@ def get_val_transform(size=(256, 256)):
 
 if __name__ == "__main__":
 
+    train_model(get_train_transform=get_train_transform(),get_val_transform=get_val_transform())
   
     results = predict(visualize=False)
