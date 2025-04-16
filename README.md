@@ -13,6 +13,7 @@ Our approach leverages **Faster R-CNN's powerful detection capabilities**:
 2. **Number Reconstruction** – Detected digits are sorted by their bounding box x-coordinates to form the final number string.
 
 This two-step design enables robust digit-level recognition and complete number interpretation.
+
 ---
 ## Method
 ### 1. Data Preprocessing
